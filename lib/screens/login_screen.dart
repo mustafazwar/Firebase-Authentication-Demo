@@ -1,26 +1,28 @@
 import 'dart:ui';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_core/firebase_core.dart';
-import 'package:firebaseintro/homescreen.dart';
-import 'package:firebaseintro/register_screen.dart';
+import 'package:firebaseintro/provider/app_provider.dart';
+import 'package:firebaseintro/screens/homescreen.dart';
+import 'package:firebaseintro/screens/register_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
-class LoginScreen extends StatefulWidget {
+class LoginScreen extends ConsumerStatefulWidget {
   const LoginScreen({super.key});
 
   @override
-  State<LoginScreen> createState() => _LoginScreenState();
+  ConsumerState<LoginScreen> createState() => _LoginScreenState();
 }
 
-class _LoginScreenState extends State<LoginScreen> {
+class _LoginScreenState extends ConsumerState<LoginScreen> {
   final myKey = GlobalKey<FormState>();
   final email = TextEditingController();
   final password = TextEditingController();
-  late FirebaseApp myApp;
   final auth = FirebaseAuth.instance;
+  final reff = FirebaseFirestore.instance;
 
   void loginUser() async {
     try {
@@ -28,7 +30,10 @@ class _LoginScreenState extends State<LoginScreen> {
         email: email.text,
         password: password.text,
       );
+      final user = auth.currentUser;
 
+      await reff.collection('users').doc(user!.uid).set({"name": email.text});
+      ref.read(todoProvider.notifier).fetchData();
       Navigator.pushAndRemoveUntil(
         context,
         MaterialPageRoute(builder: (context) => Homescreen()),
@@ -208,6 +213,9 @@ class _LoginScreenState extends State<LoginScreen> {
       //paste this comand in cmd              ./gradlew signingReport
 
       await auth.signInWithCredential(credential);
+
+      final user = auth.currentUser;
+      await reff.collection('users').doc(user!.uid).set({'email': user.email});
 
       Navigator.pushAndRemoveUntil(
         context,

@@ -1,6 +1,7 @@
 {
   "project_info": {
     "project_number": "711393403861",
+    "firebase_url": "https://fir-intro-7b3dc-default-rtdb.firebaseio.com",
     "project_id": "fir-intro-7b3dc",
     "storage_bucket": "fir-intro-7b3dc.firebasestorage.app"
   },
@@ -12,7 +13,20 @@
           "package_name": "com.example.firebaseintro"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "711393403861-lh7fli582togcra7v2a1vl7i9tukv3bf.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.firebaseintro",
+            "certificate_hash": "d88efb6ac75d5dc1609d4a2d1c95499a871893a1"
+          }
+        },
+        {
+          "client_id": "711393403861-8rie35ck78e7kshaevtp1oqrftme9a61.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
           "current_key": "AIzaSyAKMUQnRwanK-v94gEgVe1AbwSzV8O1CNc"
@@ -20,7 +34,12 @@
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "711393403861-8rie35ck78e7kshaevtp1oqrftme9a61.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
         }
       }
     }
