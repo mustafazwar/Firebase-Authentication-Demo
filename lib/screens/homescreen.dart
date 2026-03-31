@@ -3,6 +3,7 @@ import 'package:firebaseintro/provider/app_provider.dart';
 import 'package:firebaseintro/screens/add_todo_screen.dart';
 import 'package:firebaseintro/screens/ai_model_screen.dart';
 import 'package:firebaseintro/screens/login_screen.dart';
+import 'package:firebaseintro/screens/realtime_homepage.dart';
 import 'package:firebaseintro/screens/update_todo_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -150,6 +151,9 @@ class _HomescreenState extends ConsumerState<Homescreen> {
         mainAxisSize: .min,
         children: [
           ElevatedButton(
+            onLongPress: (){
+              Navigator.push(context, MaterialPageRoute(builder: (context) => RealtimeHomepage(),));
+            },
             onPressed: () async {
               ref.read(todoProvider.notifier).fetchData();
 
